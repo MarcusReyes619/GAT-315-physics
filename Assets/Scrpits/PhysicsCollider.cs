@@ -21,6 +21,7 @@ public class PhysicsCollider : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         status = "Trigger enter " + other.gameObject.name;
+        Debug.Log("cunt");
     }
     private void OnTriggerStay(Collider other)
     {
