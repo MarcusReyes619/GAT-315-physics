@@ -30,6 +30,10 @@ public class PhysicsCollider : MonoBehaviour
     {
         status = "Trigger enter " + other.gameObject.name;
 
+        contact = other.ClosestPoint(transform.position);
+        normal = (transform.position - contact).normalized;
+
+        Instantiate(fx, contact, Quaternion.LookRotation(normal));
     }
     private void OnTriggerStay(Collider other)
     {
