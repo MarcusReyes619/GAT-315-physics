@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 [RequireComponent(typeof(Rigidbody))]
 public class Block : MonoBehaviour
 {
 
     [SerializeField] int points = 100;
     [SerializeField] AudioSource audioSource;
+    //[SerializeField] TMP_Text pointUI;
+
+    BoxCollider cd;
 
     Rigidbody rb;
     bool destoryed = false;
@@ -23,6 +26,8 @@ public class Block : MonoBehaviour
         {
             audioSource.Play();
         }
+        
+        
     }
 
     private void OnTriggerStay(Collider other)
@@ -33,7 +38,7 @@ public class Block : MonoBehaviour
             && rb.angularVelocity.magnitude ==0)
         { 
             destoryed = true;
-            print(points);
+            //pointUI.text = "ree";
             Destroy(gameObject, 2);
         }
     }
