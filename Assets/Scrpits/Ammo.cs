@@ -15,7 +15,7 @@ public class Ammo : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
        // rb.AddRelativeForce(transform.rotation * Vector3.forward, ForceMode.VelocityChange);
-        rb.AddRelativeForce(transform.forward * speed, ForceMode.VelocityChange);
+        rb.AddRelativeForce(Vector3.forward * speed, ForceMode.VelocityChange);
 
         
     }
