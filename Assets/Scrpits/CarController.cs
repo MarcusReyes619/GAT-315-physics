@@ -36,8 +36,7 @@ public class CarController : MonoBehaviour
         float steering = Input.GetAxis("Horizontal") * maxSteeringAngle;
         foreach (Axle axle in axles)
         {
-            UpdateWheelTransform(axle.leftWheel);
-            UpdateWheelTransform(axle.rightWheel);
+           
             if (axle.isSteering)
             {
                 axle.leftWheel.collider.steerAngle = steering;
@@ -48,7 +47,9 @@ public class CarController : MonoBehaviour
                 axle.leftWheel.collider.motorTorque = motor;
                 axle.rightWheel.collider.motorTorque = motor;
             }
-         
+            UpdateWheelTransform(axle.leftWheel);
+            UpdateWheelTransform(axle.rightWheel);
+
         }
     }
 }
