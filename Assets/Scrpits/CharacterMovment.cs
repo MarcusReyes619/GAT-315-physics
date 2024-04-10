@@ -45,7 +45,8 @@ public class CharacterMovment : MonoBehaviour
         controller.Move(move * Time.deltaTime * playerSpeed);
 
         
-        animator.SetFloat("Speed", move.magnitude);
+       
+        
 
         if (move != Vector3.zero)
         {
@@ -58,9 +59,18 @@ public class CharacterMovment : MonoBehaviour
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * Physics.gravity.y);
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            animator.SetBool("Equitp", !animator.GetBool("Equitp"));
+        }
 
         playerVelocity.y += Physics.gravity.y * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+
+
+        animator.SetFloat("Speed", move.magnitude * playerSpeed);
+        animator.SetBool("onGround", groundedPlayer);
     }
 
   
