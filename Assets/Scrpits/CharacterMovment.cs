@@ -13,11 +13,13 @@ public class CharacterMovment : MonoBehaviour
     [SerializeField, Range(1, 10)] float pushPower = 2.0f;
 
     [SerializeField] Transform view;
+    [SerializeField] Animator animator;
 
 
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
+     
     
     private float gravityValue = -9.81f;
 
@@ -33,6 +35,7 @@ public class CharacterMovment : MonoBehaviour
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
+            
         }
 
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -40,6 +43,9 @@ public class CharacterMovment : MonoBehaviour
         //view space
         move = Quaternion.Euler(0,view.rotation.eulerAngles.y, 0) * move;
         controller.Move(move * Time.deltaTime * playerSpeed);
+
+        
+        animator.SetFloat("Speed", move.magnitude);
 
         if (move != Vector3.zero)
         {
