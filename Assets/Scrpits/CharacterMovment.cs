@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 
 [RequireComponent(typeof(CharacterController))]
@@ -14,6 +15,7 @@ public class CharacterMovment : MonoBehaviour
 
     [SerializeField] Transform view;
     [SerializeField] Animator animator;
+    [SerializeField] Rig rig ;
 
 
     private CharacterController controller;
@@ -26,7 +28,7 @@ public class CharacterMovment : MonoBehaviour
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
-
+        rig.weight = (animator.GetBool("Equipped")) ? 1 : 0;
     }
 
     void Update()
@@ -62,12 +64,23 @@ public class CharacterMovment : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             animator.SetBool("Equitp", !animator.GetBool("Equitp"));
+
+            //rig.weight = (animator.GetBool("Equipped")) ? 1 : 0;
+            if (animator.GetBool("Equipped"))
+            {
+                rig.weight = 1;
+            }
+            else
+            {
+                rig.weight = 0;
+            }
         }
+
 
         playerVelocity.y += Physics.gravity.y * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
-
+     
 
         animator.SetFloat("Speed", move.magnitude * playerSpeed);
         animator.SetBool("onGround", groundedPlayer);

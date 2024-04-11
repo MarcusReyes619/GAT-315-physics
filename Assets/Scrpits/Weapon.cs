@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
     [SerializeField] GameObject ammo;
-    [SerializeField]  Transform emission;
+    [SerializeField] Transform emission;
     [SerializeField] AudioSource audioSource;
 
-    // Update is called once per frame
+    public bool equipped = false;
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        Debug.DrawRay(emission.position, emission.forward * 10, Color.red);
+
+        if (equipped && Input.GetMouseButtonDown(0))
         {
-            audioSource.Play();
+            if (audioSource != null) audioSource.Play();
             Instantiate(ammo, emission.position, emission.rotation);
         }
     }
